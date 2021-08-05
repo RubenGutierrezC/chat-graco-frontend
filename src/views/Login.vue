@@ -10,8 +10,9 @@
           type="text"
           placeholder="username"
           aria-label="default input example"
+          v-model="username"
         />
-        <button class="btn btn-primary">Iniciar sesión</button>
+        <button @click="login" class="btn btn-primary">Iniciar sesión</button>
       </div>
     </div>
   </div>
@@ -25,7 +26,6 @@ export default {
   methods: {
     login() {
       this.$socket.emit("join", { username: this.username }, (resp) => {
-        console.log(resp);
         if (resp) {
           this.$store.dispatch("user", this.username);
           this.$router.push("/chat");
